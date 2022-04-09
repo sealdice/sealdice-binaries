@@ -1,0 +1,159 @@
+project_name: sealdice-core
+release:
+  github:
+    owner: sealdice/sealdice
+    name: sealdice-core
+  name_template: '{{.Tag}}'
+scoop:
+  name: sealdice-core
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+  commit_msg_template: Scoop update for {{ .ProjectName }} version {{ .Tag }}
+builds:
+- id: sealdice-core
+  goos:
+  - linux
+  - windows
+  - darwin
+  goarch:
+  - "386"
+  - arm64
+  - amd64
+  goarm:
+  - "6"
+  gomips:
+  - hardfloat
+  targets:
+  - linux_arm64
+  - linux_amd64
+  - windows_386
+  - windows_amd64
+  - darwin_amd64
+  ignore:
+  - goos: windows
+    goarch: arm64
+  - goos: linux
+    goarch: "386"
+  - goos: darwin
+    goarch: arm64
+  dir: .
+  main: .
+  binary: sealdice-core
+  env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+  - CGO_FLAGS=-Werror=unused-variable -Werror=implicit-function-declaration -O2 -H=windowsgui
+  builder: go
+  gobinary: go
+  ldflags:
+  - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    -X main.builtBy=goreleaser
+  flags:
+  - -trimpath
+archives:
+- id: default
+  builds:
+  - sealdice-core
+  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm
+    }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}'
+  replacements:
+    "386": i386
+    amd64: amd64
+    darwin: darwin
+    linux: linux
+    windows: windows
+  format: tar.gz
+  format_overrides:
+  - goos: windows
+    format: zip
+  files:
+  - src: SealDice 指令手册.pdf
+  - src: data/helpdoc/COC
+    dst: .
+  - src: data/helpdoc/DND
+    dst: .
+  - src: data/names
+    dst: .
+  - src: frontend
+    dst: .
+  - src: temp/go-cqhttp_{{ .Os }}_{{ .Arch }}
+    dst: go-cqhttp
+    strip_parent: true
+snapshot:
+  name_template: '{{ incpatch .Version }}'
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+changelog:
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+  sort: asc
+  groups:
+  - title: Features
+    regexp: ^.*feat[(\w)]*:+.*$
+  - title: Bug fixes
+    regexp: ^.*fix[(\w)]*:+.*$
+    order: 1
+  - title: Others
+    order: 999
+dist: dist
+env_files:
+  github_token: ~/.config/goreleaser/github_token
+  gitlab_token: ~/.config/goreleaser/gitlab_token
+  gitea_token: ~/.config/goreleaser/gitea_token
+before:
+  hooks:
+  - go mod tidy
+source:
+  name_template: '{{ .ProjectName }}-{{ .Version }}'
+  format: tar.gz
+gomod:
+  gobinary: go
+announce:
+  twitter:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+  reddit:
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    url_template: '{{ .ReleaseURL }}'
+  slack:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+    username: GoReleaser
+  discord:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+    author: GoReleaser
+    color: "3888754"
+    icon_url: https://goreleaser.com/static/avatar.png
+  teams:
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+    color: '#2D313E'
+    icon_url: https://goreleaser.com/static/avatar.png
+  smtp:
+    subject_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    body_template: 'You can view details from: {{ .ReleaseURL }}'
+  mattermost:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    username: GoReleaser
+  linkedin:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+  telegram:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL
+      }}'
+  webhook:
+    message_template: '{ "message": "{{ .ProjectName }} {{ .Tag }} is out! Check it
+      out at {{ .ReleaseURL }}"}'
+    content_type: application/json; charset=utf-8
+github_urls:
+  download: https://github.com
+gitlab_urls:
+  download: https://gitlab.com
