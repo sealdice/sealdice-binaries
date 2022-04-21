@@ -1,6 +1,7 @@
-#sealdice-binaries
+# sealdice-binaries
 
 海豹TRPG骰点核心
+
 二进制文件
 
 官方网站:
