@@ -1,1 +1,1 @@
-{"project_name":"sealdice-core","tag":"v0.99.13","previous_tag":"v0.99.12","version":"0.99.14","commit":"d166fbaba059d0382ec2abe66c2212ba51cdb076","date":"2022-04-22T02:10:05.2830503+08:00","runtime":{"goos":"windows","goarch":"amd64"}}
+{"project_name":"sealdice-core","tag":"v0.99.13","previous_tag":"v0.99.12","version":"0.99.14","commit":"751155e3a6785d98172b62a54caa0ec55188ce37","date":"2022-04-23T17:18:54.6025783+08:00","runtime":{"goos":"windows","goarch":"amd64"}}
