@@ -1,0 +1,5 @@
+14fce79526e4c73f9e731bf938dcb2e802164562ebe338c6e20f4b6d30a9e6d4  sealdice-core_1.0.2_windows_i386.zip
+2a2c29b169e5dad171683da2dcf4ab27b93b8882ca7f4f3b5bc9368d09701714  sealdice-core_1.0.2_linux_arm64.tar.gz
+6c890260581d95a27bdebc34b656f001d7c7ba461bb2e3a0f3cc13171dfe4c4c  sealdice-core_1.0.2_windows_amd64.zip
+a83d9ba6ca9890d5dbedcfcf36169d15fa77bc17decce1ccef480453cef4cd4a  sealdice-core_1.0.2_linux_amd64.tar.gz
+cc74b56b0ababa51086b25da6281b7a0795717a5fd28c08af31aaf35dabe8e01  sealdice-core_1.0.2_darwin_amd64.tar.gz
