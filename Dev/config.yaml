@@ -1,7 +1,7 @@
 project_name: sealdice-core
 release:
   github:
-    owner: Szzrain
+    owner: sealdice
     name: sealdice-core
   name_template: '{{.Tag}}'
 scoop:
@@ -115,9 +115,6 @@ gomod:
 announce:
   twitter:
     message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
-  mastodon:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
-    server: ""
   reddit:
     title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
     url_template: '{{ .ReleaseURL }}'
